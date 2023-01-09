@@ -36,7 +36,7 @@ public class PomodoroClock {
         isRunning = true;
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
-                timeRemaining--;
+                timeRemaining--;    // work session
                 if (timeRemaining == 0) {
                     pomodorosCompleted++;
                     if (pomodorosCompleted == 8) {
