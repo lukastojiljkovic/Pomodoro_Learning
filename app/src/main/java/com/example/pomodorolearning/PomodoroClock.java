@@ -56,14 +56,15 @@ public class PomodoroClock {
         }, 1000, 1000);
     }
 
-    public void pause() {
+    // TODO: Fix resume (click the pause/resume bt 2nd time)
+    /* public void pause() {
         if (!isRunning) {
             return;
         }
         isRunning = false;
         timer.cancel();
         timer.purge();
-    }
+    } */
 
     public boolean isRunning() {
         return isRunning;
