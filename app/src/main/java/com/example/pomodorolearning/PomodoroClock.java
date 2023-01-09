@@ -35,10 +35,6 @@ public class PomodoroClock {
         isLongBreakSession = false;
     }
 
-    public boolean isRunning() {
-        return isRunning;
-    }
-
     public void start() {
         if (isRunning) {
             return;
@@ -86,6 +82,10 @@ public class PomodoroClock {
         isRunning = false;
         timer.cancel();
         timer.purge();
+    }
+
+    public boolean isRunning() {
+        return isRunning;
     }
 
     public int getTimeRemaining() {
