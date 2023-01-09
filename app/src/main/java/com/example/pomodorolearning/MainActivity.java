@@ -31,19 +31,6 @@ public class MainActivity extends AppCompatActivity {
             clock.start();
         });
 
-        // TODO: Fix resume crashing app...
-        Button pauseResumeButton = findViewById(R.id.brPauseRes);
-        pauseResumeButton.setOnClickListener(view -> {
-            if (clock == null) {
-                return;
-            }
-            if (clock.isRunning()) {
-                clock.pause();
-            } else {
-                clock.start();
-            }
-        });
-
         ProgressBar progressBar;
         progressBar = findViewById(R.id.progressBar);
         Timer timer = new Timer();
@@ -88,25 +75,5 @@ public class MainActivity extends AppCompatActivity {
         Button exitButton = findViewById(R.id.btExit);
         exitButton.setOnClickListener(view -> finish());
 
-        TextView workText = findViewById(R.id.work_text);
-        TextView shortBreakText = findViewById(R.id.short_break_text);
-        TextView longBreakText = findViewById(R.id.long_break_text);
-        if (clock.isRunning()) {
-            if (clock.isWorkSession()) {
-                workText.setVisibility(View.VISIBLE);
-                shortBreakText.setVisibility(View.INVISIBLE);
-                longBreakText.setVisibility(View.INVISIBLE);
-            }
-            if (clock.isShortBreakSession()) {
-                workText.setVisibility(View.INVISIBLE);
-                shortBreakText.setVisibility(View.VISIBLE);
-                longBreakText.setVisibility(View.INVISIBLE);
-            }
-            if (clock.isLongBreakSession()) {
-                workText.setVisibility(View.INVISIBLE);
-                shortBreakText.setVisibility(View.INVISIBLE);
-                longBreakText.setVisibility(View.VISIBLE);
-            }
-        }
     }
 }

@@ -56,19 +56,6 @@ public class PomodoroClock {
         }, 1000, 1000);
     }
 
-    public void pause() {
-        if (!isRunning) {
-            return;
-        }
-        isRunning = false;
-        timer.cancel();
-        timer.purge();
-    }
-
-    public boolean isRunning() {
-        return isRunning;
-    }
-
     public int getTimeRemaining() {
         return timeRemaining;
     }
