@@ -14,6 +14,9 @@ public class PomodoroClock {
     private static final int DEFAULT_SHORT_BREAK_TIME = 5;
     private static final int DEFAULT_LONG_BREAK_TIME = 20;
     private boolean isRunning;
+    private boolean isWorkSession;
+    private boolean isShortBreakSession;
+    private boolean isLongBreakSession;
 
     public PomodoroClock() {
         this(DEFAULT_WORK_TIME, DEFAULT_SHORT_BREAK_TIME, DEFAULT_LONG_BREAK_TIME);
@@ -27,6 +30,9 @@ public class PomodoroClock {
         pomodorosCompleted = 0;
         timer = new Timer();
         isRunning = false;
+        isWorkSession = false;
+        isShortBreakSession = false;
+        isLongBreakSession = false;
     }
 
     public void start() {
@@ -34,9 +40,15 @@ public class PomodoroClock {
             return;
         }
         isRunning = true;
+        isWorkSession = true;
+        isShortBreakSession = false;
+        isLongBreakSession = false;
         timer.scheduleAtFixedRate(new TimerTask() {
             public void run() {
                 timeRemaining--;
+                isWorkSession = true;
+                isShortBreakSession = false;
+                isLongBreakSession = false;
                 if (timeRemaining == 0) {
                     pomodorosCompleted++;
                     if (pomodorosCompleted == 8) {
@@ -44,12 +56,19 @@ public class PomodoroClock {
                         timer.cancel();
                         timer.purge();
                         isRunning = false;
+                        isWorkSession = false;
+                        isShortBreakSession = false;
+                        isLongBreakSession = false;
                     } else if (pomodorosCompleted % 4 == 0) {
                         // Take a long break
                         timeRemaining = longBreakTime * 60;
+                        isWorkSession = false;
+                        isLongBreakSession = true;
                     } else {
                         // Take a short break
                         timeRemaining = shortBreakTime * 60;
+                        isWorkSession = false;
+                        isShortBreakSession = true;
                     }
                 }
             }
@@ -87,5 +106,17 @@ public class PomodoroClock {
 
     public int getShortBreakTime() {
         return shortBreakTime;
+    }
+
+    public boolean isWorkSession() {
+        return isWorkSession;
+    }
+
+    public boolean isShortBreakSession() {
+        return isShortBreakSession;
+    }
+
+    public boolean isLongBreakSession() {
+        return isLongBreakSession;
     }
 }
