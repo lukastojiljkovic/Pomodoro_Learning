@@ -1,10 +1,9 @@
 package com.example.pomodorolearning;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
